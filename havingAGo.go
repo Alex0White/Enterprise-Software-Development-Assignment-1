@@ -19,34 +19,33 @@ database{
 }
 */
 
-
 type marks struct {
-	class string
-	student_id int
-	marks float32
+	class      string  `json:"class"`
+	student_id int     `json:"student_id"`
+	marks      float32 `json:"mark"`
 }
 
 type students struct {
-	student_id int
-	first_name string
-	last_name string
-	age int
-	phone_numbr string
-	suburb string
-	city string
+	student_id   int    `json:"student_id"`
+	first_name   string `json:"first_name"`
+	last_name    string `json:"last_name"`
+	age          int    `json:"age"`
+	phone_number string `json:"phone_numebr"`
+	suburb       string `json:"suburb"`
+	city         string `json:"city"`
 }
 type database struct {
-	markInfo []marks
-	studentInfo []students
+	theMarks    []marks    `json:"marks"`
+	theStudents []students `json:"students"`
 }
 
 func main() {
 
+	//var dat map[string]interface{}
 	var dat map[string]interface{}
-	var d database
-
 
 	jsonFile, err := ioutil.ReadFile("data.json")
+	//fmt.Println(jsonFile)
 	check(err)
 	//fmt.Print(string(jsonFile))
 
@@ -58,10 +57,11 @@ func main() {
 	if err := json.Unmarshal(jsonFile, &dat); err != nil {
 		panic(err)
 	}
-
-
-	fmt.Println(d)
-	fmt.Println(dat)
+	marksArray := dat["marks"]
+	//database := dat["marks"], dat["students"]
+	//database{dat["marks"], dat["students"]}
+	//fmt.Println(dat)
+	fmt.Println(marksArray)
 
 	/*
 		res1D := &Response1{
