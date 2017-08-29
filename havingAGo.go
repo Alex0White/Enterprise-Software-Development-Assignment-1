@@ -124,7 +124,10 @@ func main() {
 	if err := json.Unmarshal(jsonFile, &d); err != nil {
 		panic(err)
 	}
-
+	//fmt.Println(d.Marks[0].Class)
+	dataOverveiw(d)
+}
+func dataOverveiw(d Database) {
 	for i := 0; i < len(d.Students); i++ {
 		var studentMarks string = ""
 		var studentNames string = d.Students[i].FirstName + " " + d.Students[i].LastName + " "
@@ -137,6 +140,4 @@ func main() {
 		}
 		fmt.Println(studentNames + studentMarks)
 	}
-	//fmt.Println(d.Marks[0].Class)
-
 }
