@@ -52,10 +52,13 @@ func main() {
 	t1 := time.Now()
 	fmt.Println("Used time: ", t1.Sub(t0))
 	fmt.Println("Used time: ", t2.Sub(t3))
+	averageMark(d)
 
 }
 
 func dataOverveiw(d Database) {
+
+	fmt.Println(d.Students[0].FirstName)
 	for i := 0; i < len(d.Students); i++ {
 		var studentMarks string = ""
 		var studentNames string = d.Students[i].FirstName + " " + d.Students[i].LastName + " "
@@ -69,3 +72,33 @@ func dataOverveiw(d Database) {
 		fmt.Println(studentNames + studentMarks)
 	}
 }
+
+
+func averageMark(d Database) {
+	type suburb []struct{ //use a map
+		 singleSuburb string
+
+	}
+
+
+	var suburbStruct suburb
+	var aSuburb string
+
+
+	for i := 0; i < len(d.Students); i++ {
+		aSuburb := d.Students[i].Suburb
+		 if len(suburbStruct) == 0 {
+			suburbStruct[].singleSuburb = append(suburbStruct.singleSuburb ,aSuburb)
+		 }
+		for i := 0; i < len(suburbStruct); i++ {
+			if aSuburb == suburbStruct[i]{
+				break
+			}else if aSuburb != suburbStuct[i] && i == len(suburbStruct){
+				suburb.singleSuburb := append(suburb.singleSuburb ,aSuburb)
+			}
+		}
+	}
+
+
+}
+
