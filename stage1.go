@@ -52,7 +52,7 @@ func main() {
 	t1 := time.Now()
 	fmt.Println("Used time: ", t1.Sub(t0))
 	fmt.Println("Used time: ", t2.Sub(t3))
-	averageMark(d)
+	averageMarkTwo(d)
 
 }
 
@@ -73,7 +73,7 @@ func dataOverveiw(d Database) {
 	}
 }
 
-
+/*
 func averageMark(d Database) {
 	type suburb []struct{ //use a map
 		 singleSuburb string
@@ -85,10 +85,13 @@ func averageMark(d Database) {
 	var aSuburb string
 
 
+
+
+
 	for i := 0; i < len(d.Students); i++ {
 		aSuburb := d.Students[i].Suburb
 		 if len(suburbStruct) == 0 {
-			suburbStruct[].singleSuburb = append(suburbStruct.singleSuburb ,aSuburb)
+			 suburbStruct[].singleSuburb = append(suburbStruct.singleSuburb ,aSuburb)
 		 }
 		for i := 0; i < len(suburbStruct); i++ {
 			if aSuburb == suburbStruct[i]{
@@ -101,4 +104,26 @@ func averageMark(d Database) {
 
 
 }
+*/
+func averageMarkTwo(d Database) {
+	type Suburbs []struct {
+		suburb      string
+		student_ids []int
+	}
+	var suburbs Suburbs
+	for i := 0; i < len(d.Students); i++ {
+		aSuburb := d.Students[i].Suburb
+		fmt.Println(aSuburb)
+		for j := 0; j < len(suburbs); j++ {
+			fmt.Println("it lives")
+			if aSuburb == suburbs[j].suburb {
+				break
+			} else if aSuburb != suburbs[j].suburb && j == len(suburbs) {
 
+				suburbs = append(suburbs)
+
+			}
+		}
+	}
+	fmt.Println(suburbs[0].suburb)
+}
