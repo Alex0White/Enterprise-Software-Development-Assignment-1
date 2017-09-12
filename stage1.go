@@ -52,6 +52,7 @@ func main() {
 	t1 := time.Now()
 	fmt.Println("Used time: ", t1.Sub(t0))
 	fmt.Println("Used time: ", t2.Sub(t3))
+	//UnqueStringItemizer(d)
 	averageMarkTwo(d)
 
 }
@@ -105,25 +106,87 @@ func averageMark(d Database) {
 
 }
 */
-func averageMarkTwo(d Database) {
-	type Suburbs []struct {
-		suburb      string
-		student_ids []int
+func UnqueStringItemizer(stringSlice []string, itemString string) bool {
+	var isUnque = true
+	for i := 0; i < len(stringSlice); i++ {
+		if stringSlice[i] == itemString {
+			isUnque = false
+		}
 	}
-	var suburbs Suburbs
-	for i := 0; i < len(d.Students); i++ {
-		aSuburb := d.Students[i].Suburb
-		fmt.Println(aSuburb)
-		for j := 0; j < len(suburbs); j++ {
-			fmt.Println("it lives")
-			if aSuburb == suburbs[j].suburb {
-				break
-			} else if aSuburb != suburbs[j].suburb && j == len(suburbs) {
+	return isUnque
+}
 
-				suburbs = append(suburbs)
-
+func averageMarkTwo(d Database) {
+	var studentIds [][]int // this is a array of the studentIds which corrospond to suburbs
+	var suburbs []string
+	var classes []string
+	var marksMap = map[string]float64{}
+	type aMark struct {
+		markID  int
+		suburb  string
+		class   string
+		markAvg int
+	}
+	type overveiw struct {
+		suburbAvgMark []struct {
+			suburb  string
+			Classes []struct {
+				classType string
+				marks     []int
+				marksAvg  int
 			}
 		}
 	}
-	fmt.Println(suburbs[0].suburb)
+
+	for i := 0; i < len(d.Students); i++ {
+		aSuburb := d.Students[i].Suburb
+		if UnqueStringItemizer(suburbs, aSuburb) {
+			suburbs = append(suburbs, aSuburb)
+		}
+	}
+	fmt.Println(suburbs)
+	for i := 0; i < len(d.Marks); i++ {
+		aClass := d.Marks[i].Class
+		if UnqueStringItemizer(classes, aClass) {
+			classes = append(classes, aClass)
+		}
+	}
+	/*
+		fmt.Println(classes)
+		fmt.Println(len(suburbs))
+		fmt.Println("d.Students lenght", len(d.Students))*/
+	studentIds = make([][]int, len(suburbs))
+	for i := 0; i < len(d.Students); i++ {
+
+		for j := 0; j < len(suburbs); j++ {
+
+			if suburbs[j] == d.Students[i].Suburb {
+
+				studentIds[j] = append(studentIds[j], d.Students[i].StudentID)
+				break
+			}
+		}
+	}
+	//fmt.Println(studentIds)
+	for i := 0; i < len(studentIds); i++ { //suburbs [Tamatea Mayfair Mahora Onekawa Akina Greenmeadows Taradale Ahuriri]
+		//new := aMark{i, suburbs[i], "", 0}
+		for j := 0; j < len(studentIds[i]); j++ { //a student from Tamatea marks[programming hardware packages etc]
+			for m := range d.Marks { // get this student and match him up with marks struct should match with 4 Marks objects which each contain a matching student ID
+				for c := range classes {
+
+					if d.Marks[m].StudentID == studentIds[i][j] && classes[c] == d.Marks[m].Class { //this is a mark for a specific class within a specific suburb
+						var mapkey string = suburbs[i] + " " + classes[c]
+						num, ok := marksMap[mapkey]
+						if ok {
+							marksMap[mapkey] = (num + d.Marks[m].Mark) / 2
+						} else {
+							marksMap[mapkey] = d.Marks[m].Mark
+						}
+					}
+				}
+			}
+		}
+	}
+	fmt.Println(marksMap)
+	fmt.Println(len(marksMap))
 }
