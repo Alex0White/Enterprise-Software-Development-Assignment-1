@@ -105,25 +105,60 @@ func averageMark(d Database) {
 
 }
 */
-func averageMarkTwo(d Database) {
-	type Suburbs []struct {
-		suburb      string
-		student_ids []int
+func isInSuburbs(s []string, aS string) bool {
+	var answer bool
+	answer = true
+	for i := 0; i < len(s); i++ {
+		if s[i] == aS {
+			answer = true
+		} else if s[i] != aS {
+			answer = false
+		}
+
 	}
-	var suburbs Suburbs
+	return answer
+}
+func averageMarkTwo(d Database) {
+	/*
+		type Suburbs []struct {
+			suburb      string
+			student_ids []int
+		}
+	*/
+
+	//student_ids := [][]int{}
+
+	// These are the first two rows.
+	suburbs := []string{}
+
+	//row1 := []int{1, 2, 3}
+	//row2 := []int{4, 5, 6}
+
+	// Append each row to the two-dimensional slice.
+	//values = append(values, row1)
+	//values = append(values, row2)
+	//fmt.Println(values[0])
+	//stringThing := []string{"lol"}
+	//values = append(values, stringThing)
+	// if [this array contains suburb] return true
+	//if len(suburbs) == 0 {
+	//	suburbs = append(suburbs, d.Students[0].Suburb)
+	//}
+
 	for i := 0; i < len(d.Students); i++ {
 		aSuburb := d.Students[i].Suburb
 		fmt.Println(aSuburb)
+		isInSuburbs(suburbs, aSuburb)
 		for j := 0; j < len(suburbs); j++ {
-			fmt.Println("it lives")
-			if aSuburb == suburbs[j].suburb {
-				break
-			} else if aSuburb != suburbs[j].suburb && j == len(suburbs) {
+			//fmt.Println("it lives")
 
-				suburbs = append(suburbs)
+			if aSuburb != suburbs[j] {
 
+				suburbs = append(suburbs, aSuburb)
 			}
 		}
+
 	}
-	fmt.Println(suburbs[0].suburb)
+	//fmt.Println(suburbs[0])
+
 }
