@@ -120,7 +120,8 @@ func averageMarkTwo(d Database) {
 	var studentIds [][]int // this is a array of the studentIds which corrospond to suburbs
 	var suburbs []string
 	var classes []string
-	var marksMap = map[string]float64{}
+	var marksMap = map[string][2]float64{}
+
 	type aMark struct {
 		markID  int
 		suburb  string
@@ -167,6 +168,8 @@ func averageMarkTwo(d Database) {
 			}
 		}
 	}
+	var bigmarks float64
+	//var counter float64
 	//fmt.Println(studentIds)
 	for i := 0; i < len(studentIds); i++ { //suburbs [Tamatea Mayfair Mahora Onekawa Akina Greenmeadows Taradale Ahuriri]
 		//new := aMark{i, suburbs[i], "", 0}
@@ -178,20 +181,28 @@ func averageMarkTwo(d Database) {
 						var mapkey string = suburbs[i] + " " + classes[c]
 						num, ok := marksMap[mapkey]
 						if ok {
-							marksMap[mapkey] = (num + d.Marks[m].Mark) / 2
+							bigmarks = (num[0] + d.Marks[m].Mark)
+
+							num[0] = bigmarks
+							num[1] = (num[1] + 1)
+							marksMap[mapkey] = num
 						} else {
-							marksMap[mapkey] = d.Marks[m].Mark
+							num[0] = d.Marks[m].Mark
+							num[1] = (num[1] + 1)
+							marksMap[mapkey] = num
+
 						}
+
 					}
+
 				}
+
+			}
 
 		}
 
+		fmt.Println(marksMap)
+		fmt.Println(len(marksMap))
+
 	}
-
-
-
-	fmt.Println(marksMap)
-	fmt.Println(len(marksMap))
-
 }
