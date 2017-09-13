@@ -106,58 +106,6 @@ func averageMark(d Database) {
 
 }
 */
-<<<<<<< HEAD
-func isInSuburbs(s []string, aS string) bool {
-	var answer bool
-	answer = true
-	for i := 0; i < len(s); i++ {
-		if s[i] == aS {
-			answer = true
-		} else if s[i] != aS {
-			answer = false
-		}
-
-	}
-	return answer
-}
-func averageMarkTwo(d Database) {
-	/*
-		type Suburbs []struct {
-			suburb      string
-			student_ids []int
-		}
-	*/
-
-	//student_ids := [][]int{}
-
-	// These are the first two rows.
-	suburbs := []string{}
-
-	//row1 := []int{1, 2, 3}
-	//row2 := []int{4, 5, 6}
-
-	// Append each row to the two-dimensional slice.
-	//values = append(values, row1)
-	//values = append(values, row2)
-	//fmt.Println(values[0])
-	//stringThing := []string{"lol"}
-	//values = append(values, stringThing)
-	// if [this array contains suburb] return true
-	//if len(suburbs) == 0 {
-	//	suburbs = append(suburbs, d.Students[0].Suburb)
-	//}
-
-	for i := 0; i < len(d.Students); i++ {
-		aSuburb := d.Students[i].Suburb
-		fmt.Println(aSuburb)
-		isInSuburbs(suburbs, aSuburb)
-		for j := 0; j < len(suburbs); j++ {
-			//fmt.Println("it lives")
-
-			if aSuburb != suburbs[j] {
-
-				suburbs = append(suburbs, aSuburb)
-=======
 func UnqueStringItemizer(stringSlice []string, itemString string) bool {
 	var isUnque = true
 	for i := 0; i < len(stringSlice); i++ {
@@ -236,16 +184,14 @@ func averageMarkTwo(d Database) {
 						}
 					}
 				}
->>>>>>> 242d5e4af92cec55e4f393a41498050751d396d7
-			}
+
 		}
 
 	}
-<<<<<<< HEAD
-	//fmt.Println(suburbs[0])
 
-=======
+
+
 	fmt.Println(marksMap)
 	fmt.Println(len(marksMap))
->>>>>>> 242d5e4af92cec55e4f393a41498050751d396d7
+
 }
