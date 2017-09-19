@@ -1,4 +1,4 @@
-package main
+/*package main
 
 import "encoding/json"
 import "fmt"
@@ -60,3 +60,4 @@ func main() {
 	d := map[string]int{"apple": 5, "lettuce": 7}
 	enc.Encode(d)
 }
+*/

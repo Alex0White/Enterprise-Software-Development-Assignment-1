@@ -1,8 +1,9 @@
-package main
+/*package main
 
 import (
 	"encoding/json"
 	"fmt"
+	"testing"
 )
 
 type Server struct {
@@ -19,3 +20,4 @@ func main() {
 	json.Unmarshal([]byte(str), &s)
 	fmt.Println(s)
 }
+*/

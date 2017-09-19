@@ -1,4 +1,4 @@
-package main
+/*package main
 
 import (
 	"database/sql"
@@ -8,7 +8,6 @@ import (
 	"log"
 	"strconv"
 	"time"
-
 	_ "github.com/lib/pq"
 	"github.com/pkg/profile"
 )
@@ -19,12 +18,7 @@ func check(e error) {
 	}
 }
 
-/*
-database{
-	[]mark,
-	students: [...]
-}
-*/
+
 type Database struct {
 	Marks []struct {
 		StudentID int     `json:"student_id"`
@@ -44,7 +38,7 @@ type Database struct {
 
 func main() {
 
-	db, err := sql.Open("postgres", "user=postgres password=password dbname=AlexDB sslmode=disable")
+	db, err := sql.Open("postgres", "user=postgres password=password dbname=AlexDB sslmode=disable port=5433")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -141,3 +135,5 @@ func dataOverveiw(d Database) {
 		fmt.Println(studentNames + studentMarks)
 	}
 }
+
+*/
